@@ -1,0 +1,110 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Admin {
+  createdAt: DateTime!
+  id: ID!
+  lastLogin: DateTime
+  name: String
+  phone: String!
+  profile: String
+  role: String
+  status: String
+}
+
+type Confirm {
+  message: String!
+  phone: String!
+  randomToken: String!
+
+  """JWT access token"""
+  token: JWT!
+  user_id: ID!
+}
+
+input ConfirmInput {
+  password: String!
+  phone: String!
+  token: String!
+}
+
+type Cursor {
+  list: [Admin!]
+  nextCursor: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""
+A field whose value is a JSON Web Token (JWT): https://jwt.io/introduction.
+"""
+scalar JWT
+
+type Login {
+  message: String!
+
+  """Refresh token"""
+  randomToken: String!
+
+  """JWT access token"""
+  token: JWT!
+  user_id: ID!
+}
+
+input LoginInput {
+  password: String!
+  phone: String!
+}
+
+type Mutation {
+  confirm(confirmInput: ConfirmInput!): Confirm!
+  login(loginInput: LoginInput!): Login!
+  register(registerInput: RegisterInput!): Register!
+  updateProfile(file: Upload): Profile!
+  verify(verifyInput: VerifyInput!): Register!
+}
+
+type Offset {
+  countPerPage: Int
+  currentPage: Int
+  lastPage: Int
+  list: [Admin!]
+  nextPage: Int
+  previousPage: Int
+  total: Int!
+}
+
+type Profile {
+  message: String!
+
+  """Should use aws S3 or Cloudinary instead of using like this"""
+  profile: String!
+}
+
+type Query {
+  admins(cursor: Int! = 0, limit: Int! = 1): Cursor!
+  adminsByoffset(limit: Int! = 1, page: Int! = 1): Offset!
+}
+
+type Register {
+  message: String!
+  phone: String!
+  token: String!
+}
+
+input RegisterInput {
+  phone: String!
+}
+
+"""The `Upload` scalar type represents a file upload."""
+scalar Upload
+
+input VerifyInput {
+  otp: String!
+  phone: String!
+  token: String!
+}

@@ -1,0 +1,46 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+directive @upper on FIELD_DEFINITION
+
+type Auth {
+  """Example field (placeholder)"""
+  id: Int!
+}
+
+type Admin {
+  id: ID!
+  name: String
+  phone: String!
+  role: String
+  status: String
+  lastLogin: DateTime
+  profile: String
+  createdAt: DateTime!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+type Query {
+  auth(id: Int!): Auth!
+  admins(cursor: Int! = 1, limit: Int! = 1): [Admin!]!
+}
+
+type Mutation {
+  createAuth(createAuthInput: CreateAuthInput!): Auth!
+  updateAuth(updateAuthInput: UpdateAuthInput!): Auth!
+  removeAuth(id: Int!): Auth!
+}
+
+input CreateAuthInput {
+  """Example field (placeholder)"""
+  id: Int!
+}
+
+input UpdateAuthInput {
+  id: Int!
+}
